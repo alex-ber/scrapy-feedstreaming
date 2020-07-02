@@ -4,7 +4,8 @@ import warnings
 from datetime import datetime
 from collections import deque
 from scrapy.extensions.feedexport import BlockingFeedStorage as _BlockingFeedStorage, FeedExporter as _FeedExporter, \
-    feed_complete_default_values_from_settings as _feed_complete_default_values_from_settings
+    feed_complete_default_values_from_settings as _feed_complete_default_values_from_settings, \
+    signals #signals is used
 from six.moves.urllib.parse import urlparse
 from six.moves.urllib.parse import parse_qs
 from scrapy.exceptions import NotConfigured, ScrapyDeprecationWarning
