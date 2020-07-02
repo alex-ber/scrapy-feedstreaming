@@ -1,6 +1,9 @@
 ## scrapy-feedstreaming
 
-Based on scrapy.extensions.feedexport.FeedExporter to live stream data. See CHANGELOG.md for detail description.
+Scrapy live Streaming data. `scrapy.extensions.feedexport.FeedExporter` fork to export item during scraping. See 
+[https://medium.com/@alex_ber/scrapy-streaming-data-cdf97434dc15]
+
+See CHANGELOG.md for detail description.
 
 
 
