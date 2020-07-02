@@ -300,12 +300,15 @@ class FeedExporter(object):
             if len(slot.buff) < slot.buff_capacity:
                 return
 
+            deferred_list = []
+
             if not slot.itemcount and not slot.store_empty:
                 # We need to call slot.storage.store nonetheless to get the file
                 # properly closed.
-                return defer.maybeDeferred(slot.storage.store, slot.file)
+                d = defer.maybeDeferred(slot.storage.store, slot.file)
+                deferred_list.append(d)
+                continue
 
-            deferred_list = []
 
             for export_item in slot.buff:
                  slot.exporter.export_item(export_item)
@@ -319,11 +322,19 @@ class FeedExporter(object):
                         'itemcount': slot.itemcount,
                         'uri': slot.uri}
             d = defer.maybeDeferred(slot.storage.store, slot.file)
-            d.addCallback(lambda _: logger.info(logfmt % "Stored", log_args,
-                                                extra={'spider': spider}))
-            d.addErrback(lambda f: logger.error(logfmt % "Error storing", log_args,
-                                                exc_info=failure_to_exc_info(f),
-                                                extra={'spider': spider}))
+            # Use `largs=log_args` to copy log_args into function's scope
+            # instead of using `log_args` from the outer scope
+            d.addCallback(
+                lambda _, largs=log_args: logger.info(
+                    logfmt % "Stored", largs, extra={'spider': spider}
+                )
+            )
+            d.addErrback(
+                lambda f, largs=log_args: logger.error(
+                    logfmt % "Error storing", largs,
+                    exc_info=failure_to_exc_info(f), extra={'spider': spider}
+                )
+            )
             deferred_list.append(d)
 
             feed = self.feeds[slot.uri_template]
