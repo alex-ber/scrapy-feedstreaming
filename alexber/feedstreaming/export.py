@@ -105,12 +105,12 @@ class S3FeedStorage(BaseS3FeedStorage):
     def _store_in_thread(self, file):
         file.seek(0)
 
-        d = self.s3_client_kwargs
+        d = self.botocore_kwargs
         d= {**d, 'Body':file}
         self.botocore_client.put_object(**d)
 
     @property
-    def s3_client_kwargs(self):
+    def botocore_kwargs(self):
         """
         Public API
         """
@@ -120,7 +120,7 @@ class S3FeedStorage(BaseS3FeedStorage):
         return d
 
     @property
-    def s3_client_base_kwargs(self):    #required
+    def botocore_base_kwargs(self):    #required
         """
         Public API
         """
