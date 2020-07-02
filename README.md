@@ -34,6 +34,9 @@ And then installing from source (see below).
 
 ### Installing from source
 ```bash
+python3 -m pip install -r req.txt # only installs "required" (relaxed)
+```
+```bash
 python3 -m pip install . # only installs "required"
 ```
 ```bash

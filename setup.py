@@ -5,7 +5,7 @@ from setuptools import setup
 
 
 #VERSION should be defined before importing UploadCommand
-VERSION = '0.0.1b1'
+VERSION = '0.0.1rc1'
 from alexber.utils import UploadCommand
 NAME = 'scrapy-feedstreaming'
 SHORT_NAME = 'feedstreaming'
@@ -21,7 +21,7 @@ def get_content(filename):
         content = f.read().splitlines()
     return content
 
-install_requires = get_content('requirements.txt')
+install_requires = get_content('req.txt')
 tests_require = get_content('requirements-tests.txt')
 
 extras = {
