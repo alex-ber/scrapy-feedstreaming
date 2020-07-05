@@ -24,7 +24,6 @@ class BaseS3FeedStorage(_BlockingFeedStorage):
     def __init__(self, uri, settings):
         self.is_optional_dependency_exists()
 
-
         access_key = settings.get('AWS_ACCESS_KEY_ID', None)
         secret_key = settings.get('AWS_SECRET_ACCESS_KEY', None)
         region_name = settings.get('FEED_STORAGE_S3_REGION', None)
@@ -49,6 +48,7 @@ class BaseS3FeedStorage(_BlockingFeedStorage):
 
 
     def _init_s3_related(self, uri, settings):
+        """This API is unstabel anc can change withou warning."""
         raise NotImplementedError
 
     @classmethod
@@ -60,6 +60,8 @@ class BaseS3FeedStorage(_BlockingFeedStorage):
     #(_storage_supported())
     def from_settings(cls, settings, uri):
         return cls(uri, settings)
+
+
 
     def _store_in_thread(self, file):
         raise NotImplementedError
