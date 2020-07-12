@@ -5,7 +5,7 @@ from setuptools import setup
 
 
 #VERSION should be defined before importing UploadCommand
-VERSION = '0.0.1rc9'
+VERSION = '0.0.1'
 from alexber.utils import UploadCommand
 NAME = 'scrapy-feedstreaming'
 SHORT_NAME = 'feedstreaming'
